@@ -36,11 +36,6 @@ for username, password in users.items():
     # Request to the API
     r = requests.get(url=api_url, params={"username": username, "password": password})
 
-    """r = requests.get(
-        url=f"http://{api_address}:{api_port}/permissions",
-        params={"username": "alice", "password": "wonderland"},
-    )"""
-
     # Get status code
     status_code = r.status_code
 
@@ -66,5 +61,5 @@ for username, password in users.items():
 
     # Print output in log file
     if os.environ.get("LOG", "").lower() in [1, "1", "true", "yes"]:
-        with open("api_test.log", "a") as file:
+        with open("api_test.log/app/logs/api_test.log", "a") as file:
             file.write(output)
