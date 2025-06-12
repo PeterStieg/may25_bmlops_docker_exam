@@ -23,7 +23,7 @@ formatted_time = time.strftime("%d. %B %Y: %H:%M:%S", current_time)
 
 # ### API CONFIGURATION
 # API address
-api_address = "http://localhost"
+api_address = os.environ.get("API_HOST", "http://172.17.0.1")
 
 # API port
 api_port = 8000
