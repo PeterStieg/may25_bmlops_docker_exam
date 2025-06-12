@@ -1,0 +1,14 @@
+# Start from minimalistic operating system
+FROM python:3.11-alpine
+RUN pip install requests
+
+# Copy the test script
+COPY first_test.py /app/first_test.py
+
+# Set working directory
+WORKDIR /app
+
+# Environment variables
+ENV LOG=1
+
+CMD python first_test.py
