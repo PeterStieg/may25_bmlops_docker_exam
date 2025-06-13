@@ -58,36 +58,42 @@ for username, password in users.items():
 
     permissions = r.json().get("permissions", "No permissions found")
 
-    for permission in permissions:
+    if test_status == "SUCCESS":
 
-        content_url = f"{api_address}:{api_port}/{permission}"
+        for permission in permissions:
 
-        content_r = requests.get(
-            url=content_url,
-            params={
-                "username": username,
-                "password": password,
-                "sentence": "life is beautiful",
-            },
-        )
+            content_url = f"{api_address}:{api_port}/{permission}/sentiment"
 
-        output = f"""
-        ================================================
-        Content test // {formatted_time}
-        ================================================
-        request done at "{content_url}"
-        | username = "{username}"
-        | password = "{password}"
-        {f'| content = "{sentences}"' if test_status == "SUCCESS" else '| content = "N/A"'}
-        {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
-        | content_response = "{content_r.text}"
-        actual result = {status_code}
-        ==>  {test_status}
-        """
+            for sentence in sentences:
 
-        print(output)
+                content_r = requests.get(
+                    url=content_url,
+                    params={
+                        "username": username,
+                        "password": password,
+                        "sentence": sentence,
+                    },
+                )
 
-        # Print output in log file
-        if os.environ.get("LOG", "").lower() in ["1", "true", "yes"]:
-            with open("/app/logs/api_test.log", "a") as file:
-                file.write(output)
+                score = content_r.json().get("score", "No score found")
+
+                output = f"""
+                ================================================
+                Content test // {formatted_time}
+                ================================================
+                request done at "{content_url}"
+                | username = "{username}"
+                | password = "{password}"
+                {f'| content = "{sentences}"' if test_status == "SUCCESS" else '| content = "N/A"'}
+                {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
+                | score = "{score}"
+                actual result = {status_code}
+                ==>  {test_status}
+                """
+
+                print(output)
+
+                # Print output in log file
+                if os.environ.get("LOG", "").lower() in ["1", "true", "yes"]:
+                    with open("/app/logs/api_test.log", "a") as file:
+                        file.write(output)
