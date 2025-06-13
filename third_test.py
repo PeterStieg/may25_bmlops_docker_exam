@@ -68,7 +68,7 @@ for username, password in users.items():
     | permissions = "{permissions}"
     {'| content = "{sentences}"' if test_status == "SUCCESS" else ''}
     {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
-    actual restult = {status_code}
+    actual result = {status_code}
     ==>  {test_status}
     """
 

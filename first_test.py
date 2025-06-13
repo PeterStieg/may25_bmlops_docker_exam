@@ -53,7 +53,7 @@ for username, password in users.items():
     | username = "{username}"
     | password = "{password}"
     {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
-    actual restult = {status_code}
+    actual result = {status_code}
     ==>  {test_status}
     """
 
