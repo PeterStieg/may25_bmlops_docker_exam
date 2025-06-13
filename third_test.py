@@ -84,16 +84,29 @@ for username, password in users.items():
                 request done at "{content_url}"
                 | username = "{username}"
                 | password = "{password}"
-                {f'| content = "{sentences}"' if test_status == "SUCCESS" else '| content = "N/A"'}
-                {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
+                | sentence = "{sentence}"
                 | score = "{score}"
+                {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
                 actual result = {status_code}
                 ==>  {test_status}
                 """
 
-                print(output)
+    else:
+        output = f"""
+                ================================================
+                Content test // {formatted_time}
+                ================================================
+                request done at "{content_url}"
+                | username = "{username}"
+                | password = "{password}"
+                {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
+                actual result = {status_code}
+                ==>  {test_status}
+                """
 
-                # Print output in log file
-                if os.environ.get("LOG", "").lower() in ["1", "true", "yes"]:
-                    with open("/app/logs/api_test.log", "a") as file:
-                        file.write(output)
+    print(output)
+
+    # Print output in log file
+    if os.environ.get("LOG", "").lower() in ["1", "true", "yes"]:
+        with open("/app/logs/api_test.log", "a") as file:
+            file.write(output)
