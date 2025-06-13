@@ -60,15 +60,27 @@ for username, password in users.items():
 
     for permission in permissions:
 
+        content_url = f"{api_address}:{api_port}/{permission}"
+
+        content_r = requests.get(
+            url=content_url,
+            params={
+                "username": username,
+                "password": password,
+                "sentence": "life is beautiful",
+            },
+        )
+
         output = f"""
         ================================================
         Content test // {formatted_time}
         ================================================
-        request done at "/{permission}"
+        request done at "{content_url}"
         | username = "{username}"
         | password = "{password}"
         {f'| content = "{sentences}"' if test_status == "SUCCESS" else '| content = "N/A"'}
         {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
+        | content_response = "{content_r.text}"
         actual result = {status_code}
         ==>  {test_status}
         """
