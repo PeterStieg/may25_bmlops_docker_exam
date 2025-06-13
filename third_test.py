@@ -60,13 +60,13 @@ for username, password in users.items():
 
     output = f"""
     ================================================
-     Content test // {formatted_time}
+    Content test // {formatted_time}
     ================================================
     request done at "/permissions"
     | username = "{username}"
     | password = "{password}"
     | permissions = "{permissions}"
-    {'| content = "{sentences}"' if test_status == "SUCCESS" else ''}
+    {f'| content = "{sentences}"' if test_status == "SUCCESS" else ''}
     {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
     actual result = {status_code}
     ==>  {test_status}
