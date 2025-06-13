@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  first_test:
+    image: first_test:latest
+    volumes:
+      - ./logs:/app/logs
+    environment:
+      - LOG=1
+
+  second_test:
+    image: second_test:latest
+    volumes:
+      - ./logs:/app/logs
+    environment:
+      - LOG=1
+
+  third_test:
+    image: third_test:latest
+    volumes:
+      - ./logs:/app/logs
+    environment:
+      - LOG=1
