@@ -11,6 +11,6 @@ COPY third_test.py /app/third_test.py
 WORKDIR /app
 
 # Environment variables
-ENV LOG=0
+ENV LOG=1
 
 CMD python third_test.py
