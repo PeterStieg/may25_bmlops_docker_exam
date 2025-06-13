@@ -12,15 +12,15 @@ except FileNotFoundError:
     print("File with registered users not found. Please check the file path.")
     users = {}
 
-# ### USER DATA
-# Get usernames and passwords from JSON file
+# ### CONTENT DATA
+# Get sentences to check
 try:
     with open("content.txt", "r", encoding="utf-8") as content_file:
         lines = content_file.readlines()
         # Remove newline characters
         sentences = [line.strip() for line in lines]
 except FileNotFoundError:
-    print("File with content. Please check the file path.")
+    print("File with content not found. Please check the file path.")
     sentences = ""
 
 
