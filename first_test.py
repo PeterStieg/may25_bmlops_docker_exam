@@ -61,5 +61,5 @@ for username, password in users.items():
 
     # Print output in log file
     if os.environ.get("LOG", "").lower() in [1, "1", "true", "yes"]:
-        with open("api_test.log/app/logs/api_test.log", "a") as file:
+        with open("app/logs/api_test.log", "a") as file:
             file.write(output)
