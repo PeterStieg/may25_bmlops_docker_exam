@@ -91,6 +91,13 @@ for username, password in users.items():
                 ==>  {test_status}
                 """
 
+                print(output)
+
+                # Print output in log file
+                if os.environ.get("LOG", "").lower() in ["1", "true", "yes"]:
+                    with open("/app/logs/api_test.log", "a") as file:
+                        file.write(output)
+
     else:
         output = f"""
                 ================================================
