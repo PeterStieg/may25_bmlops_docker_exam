@@ -1,12 +1,20 @@
 version: '3.8'
 
 services:
+  sentiment_analysis:
+    image: datascientest/fastapi
+    container_name: sentiment_analysis
+    ports:
+      - "8000:8000"
+    command: docker container run -d --rm -p 8000:8000 datascientest/fastapi
+
   first_test:
     image: first_test:latest
     volumes:
       - ./logs:/app/logs
     environment:
       - LOG=1
+    command: docker container run -d --rm first_test:latest
 
   second_test:
     image: second_test:latest
@@ -14,6 +22,7 @@ services:
       - ./logs:/app/logs
     environment:
       - LOG=1
+    command: docker container run -d --rm second_test:latest 
 
   third_test:
     image: third_test:latest
@@ -21,3 +30,4 @@ services:
       - ./logs:/app/logs
     environment:
       - LOG=1
+    command: docker container run -d --rm third_test:latest
