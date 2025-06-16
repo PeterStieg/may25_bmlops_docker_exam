@@ -64,5 +64,7 @@ for username, password in users.items():
 
     # Print output in log file
     if os.environ.get("LOG", "").lower() in ["1", "true", "yes"]:
+        # Create logs directory if it doesn't exist
+        os.makedirs("/app/logs", exist_ok=True)
         with open("/app/logs/api_test.log", "a") as file:
             file.write(output)
