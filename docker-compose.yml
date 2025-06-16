@@ -27,9 +27,6 @@ services:
     depends_on:
       sentiment_analysis:
         condition: service_healthy
-    restart: "no"
-    # Don't start automatically - will be controlled by orchestrator
-    #profiles: ["manual"]
 
   second_test:
     build:
@@ -45,7 +42,6 @@ services:
     depends_on:
       sentiment_analysis:
         condition: service_healthy
-      restart: "no"
     
   third_test:
     build:
@@ -61,6 +57,3 @@ services:
     depends_on:
       sentiment_analysis:
         condition: service_healthy
-      second_test:
-        condition: service_completed_successfully
-    restart: "no"
