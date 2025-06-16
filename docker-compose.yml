@@ -6,45 +6,57 @@ services:
     container_name: sentiment_analysis
     ports:
       - "8000:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   first_test:
     build:
       context: .
       dockerfile: DockerFile.first_test
-    image: first_test 
     container_name: first_test_container
     volumes:
       - ./logs:/app/logs
+      - ./status:/app/status  # Shared volume for status files
     environment:
       - LOG=1
       - API_HOST=http://sentiment_analysis
     depends_on:
-      - sentiment_analysis
+      sentiment_analysis:
+        condition: service_healthy
+    # Run once and exit
+    restart: "no"
 
   second_test:
     build:
       context: .
       dockerfile: DockerFile.second_test
-    image: second_test
     container_name: second_test_container
     volumes:
       - ./logs:/app/logs
+      - ./status:/app/status
     environment:
       - LOG=1
       - API_HOST=http://sentiment_analysis
     depends_on:
-      - sentiment_analysis
-
+      first_test:
+        condition: service_completed_successfully
+    restart: "no"
+    
   third_test:
     build:
       context: .
       dockerfile: DockerFile.third_test
-    image: third_test
     container_name: third_test_container
     volumes:
       - ./logs:/app/logs
+      - ./status:/app/status
     environment:
       - LOG=1
       - API_HOST=http://sentiment_analysis
     depends_on:
-      - sentiment_analysis
+      second_test:
+        condition: service_completed_successfully
+    restart: "no"
