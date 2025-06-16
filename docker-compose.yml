@@ -29,7 +29,7 @@ services:
         condition: service_healthy
     restart: "no"
     # Don't start automatically - will be controlled by orchestrator
-    profiles: ["manual"]
+    #profiles: ["manual"]
 
   second_test:
     build:
@@ -47,7 +47,7 @@ services:
         condition: service_healthy
     restart: "no"
     # Don't start automatically - will be controlled by orchestrator
-    profiles: ["manual"]
+    #profiles: ["manual"]
     
   third_test:
     build:
@@ -65,4 +65,4 @@ services:
         condition: service_healthy
     restart: "no"
     # Don't start automatically - will be controlled by orchestrator
-    profiles: ["manual"]
+    #profiles: ["manual"]
