@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8000/status || exit 1"]
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request as u_r; u_r.urlopen('http://localhost:8000/status')\" || exit 1"]
       interval: 10s
       timeout: 5s
       retries: 5
