@@ -10,7 +10,7 @@ services:
   first_test:
     build:
       context: .
-      dockerfile: DockerFile.first_file
+      dockerfile: DockerFile.first_test
     image: first_test 
     container_name: first_test_container
     volumes:
@@ -21,7 +21,7 @@ services:
   second_test:
     build:
       context: .
-      dockerfile: DockerFile.second_file
+      dockerfile: DockerFile.second_test
     image: second_test
     container_name: second_test_container
     volumes:
@@ -32,7 +32,7 @@ services:
   third_test:
     build:
       context: .
-      dockerfile: DockerFile.first_file
+      dockerfile: DockerFile.third_test
     image: third_test
     container_name: third_test_container
     volumes:
