@@ -17,6 +17,9 @@ services:
       - ./logs:/app/logs
     environment:
       - LOG=1
+      - API_HOST=http://sentiment_analysis
+    depends_on:
+      - sentiment_analysis
 
   second_test:
     build:
@@ -28,7 +31,10 @@ services:
       - ./logs:/app/logs
     environment:
       - LOG=1
-    
+      - API_HOST=http://sentiment_analysis
+    depends_on:
+      - sentiment_analysis
+
   third_test:
     build:
       context: .
@@ -39,3 +45,6 @@ services:
       - ./logs:/app/logs
     environment:
       - LOG=1
+      - API_HOST=http://sentiment_analysis
+    depends_on:
+      - sentiment_analysis
