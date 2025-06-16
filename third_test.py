@@ -78,18 +78,18 @@ for username, password in users.items():
                 score = content_r.json().get("score", "No score found")
 
                 output = f"""
-                ================================================
-                Content test // {formatted_time}
-                ================================================
-                request done at "{content_url}"
-                | username = "{username}"
-                | password = "{password}"
-                | sentence = "{sentence}"
-                | score = "{score}"
-                {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
-                actual result = {status_code}
-                ==>  {test_status}
-                """
+    ================================================
+    Content test // {formatted_time}
+    ================================================
+    request done at "{content_url}"
+    | username = "{username}"
+    | password = "{password}"
+    | sentence = "{sentence}"
+    | score = "{score}"
+    {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
+    actual result = {status_code}
+    ==>  {test_status}
+    """
 
                 print(output)
 
@@ -100,16 +100,16 @@ for username, password in users.items():
 
     else:
         output = f"""
-        ================================================
-         Content test // {formatted_time}
-        ================================================
-        request done at "{content_url}"
-        | username = "{username}"
-        | password = "{password}"
-        {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
-        actual result = {status_code}
-        ==>  {test_status}
-        """
+    ================================================
+    Content test // {formatted_time}
+    ================================================
+    request done at "/permissions"
+    | username = "{username}"
+    | password = "{password}"
+    {'expected result = 200' if username != 'clementine' else 'expected result = 403'}
+    actual result = {status_code}
+    ==>  {test_status}
+    """
 
         print(output)
 

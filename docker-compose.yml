@@ -21,7 +21,6 @@ services:
     container_name: first_test_container
     volumes:
       - ./logs:/app/logs
-      - ./status:/app/status
     environment:
       - LOG=1
       - API_HOST=http://sentiment_analysis
@@ -40,16 +39,15 @@ services:
     container_name: second_test_container
     volumes:
       - ./logs:/app/logs
-      - ./status:/app/status
     environment:
       - LOG=1
       - API_HOST=http://sentiment_analysis
     depends_on:
       sentiment_analysis:
         condition: service_healthy
+      first_test:
+        condition: service_completed_successfully
     restart: "no"
-    # Don't start automatically - will be controlled by orchestrator
-    #profiles: ["manual"]
     
   third_test:
     build:
@@ -59,13 +57,12 @@ services:
     container_name: third_test_container
     volumes:
       - ./logs:/app/logs
-      - ./status:/app/status
     environment:
       - LOG=1
       - API_HOST=http://sentiment_analysis
     depends_on:
       sentiment_analysis:
         condition: service_healthy
+      second_test:
+        condition: service_completed_successfully
     restart: "no"
-    # Don't start automatically - will be controlled by orchestrator
-    #profiles: ["manual"]
